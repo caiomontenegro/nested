@@ -2,9 +2,8 @@
 <template>
   <div>
     <h1>Welcome to Nested Items</h1>
-    <div v-for="(user, index) in userData">
-      <input type="checkbox">
-      <span>Name</span>
+    <div v-for="(user, index) in userData" key="user">
+      <user-data :userData="user"></user-data>
     </div>
   </div>
 </template>
