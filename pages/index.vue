@@ -53,6 +53,11 @@ export default {
   &__parent {
     border-left: solid 2px;
     margin-left: 15px;
+    background-color: white;
+    
+    &:hover {
+    background-color: rgb(185, 185, 218);
+    }
   }
 
   &__child {
