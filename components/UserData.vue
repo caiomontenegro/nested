@@ -4,7 +4,7 @@
     <div>
       <span v-if="lastChild" class="user__verticalLine"></span>
       <span class="user__horizontalLine"></span>
-      <input class="user__checkbox" type="checkbox" v-model="userSelected" >
+      <input class="user__checkbox" type="checkbox" v-model="userSelected" @click="toggleUser" :indeterminate="indeterminateUser">
       <span>{{ userData.name }}</span>
       <!-- <span>{{ ' ----- User: '+ userSelected }}</span>
       <span>{{ ' ----- Child: '+ childrenSelected }}</span> -->
@@ -20,6 +20,8 @@
             :userData="userDataChild"
             :lastChild="isLastChild(index)"
             :childrenSelected="userSelected"
+            @receive-child-status="receiveStatus"
+            @receive-indeterminate-status="receiveIndeterminate"
           />
         </div>
       </div>
@@ -31,7 +33,8 @@
 export default {
   data() {
     return {
-      userSelected: false
+      userSelected: false,
+      indeterminateUser: false
     }
   },
   props: {
@@ -57,12 +60,28 @@ export default {
       } else {
         return false
       }
+    },
+    receiveIndeterminate(data) {
+      // console.log("Indeterminate received: ", data)
+      this.indeterminateUser = data
+    },
+    receiveStatus(data) {
+      // console.log('received', data)
+      this.indeterminateUser = data
+    },
+    toggleUser() {
+      this.$emit('receiveChildStatus', !this.userSelected)
+      // console.log("User clickado: ", !this.userSelected)
     }
   },
 
   watch: {
     childrenSelected() {
       this.userSelected = this.childrenSelected
+      this.indeterminateUser = false
+    },
+    indeterminateUser(newValue) {
+      this.$emit('receiveIndeterminateStatus', newValue)
     }
   }
 }
