@@ -2,30 +2,38 @@
   <div class="user">
     <!-- User pai -->
     <div>
-      <span v-if="lastChild" class="user__verticalLine">
-      </span>
+      <span v-if="lastChild" class="user__verticalLine"></span>
       <span class="user__horizontalLine"></span>
-      <input class="user__checkbox" type="checkbox">
+      <input class="user__checkbox" type="checkbox" v-model="userSelected" >
       <span>{{ userData.name }}</span>
+      <!-- <span>{{ ' ----- User: '+ userSelected }}</span>
+      <span>{{ ' ----- Child: '+ childrenSelected }}</span> -->
 
       <!-- User filho  -->
       <div v-if="Object.keys(userData.children).length > 0">
-        <div 
+        <div
           v-for="(userDataChild, index) in userData.children"
-          key="index"
+          :key="index"
           :class="{user__parent: true, user__child: isLastChild(index) }"
         >
-          <user-data :userData="userDataChild" :lastChild="isLastChild(index)"></user-data>
+          <user-data
+            :userData="userDataChild"
+            :lastChild="isLastChild(index)"
+            :childrenSelected="userSelected"
+          />
         </div>
       </div>
-
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      userSelected: false
+    }
+  },
   props: {
     userData: {
       type: Object,
@@ -34,6 +42,10 @@ export default {
     lastChild: {
       type: Boolean,
       require: true
+    },
+    childrenSelected: {
+      type: Boolean,
+      require: false
     }
   },
 
@@ -45,6 +57,12 @@ export default {
       } else {
         return false
       }
+    }
+  },
+
+  watch: {
+    childrenSelected() {
+      this.userSelected = this.childrenSelected
     }
   }
 }
