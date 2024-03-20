@@ -2,12 +2,13 @@
 <template>
   <div>
     <h1>Welcome to Nested Users</h1>
+    <span>Click on the name user, to hide him.</span>
     <div 
       v-for="(user, index) in userData"
       key="index"
       :class="{user__parent: true, user__child: isLastChild(index)}"
     >
-      <user-data :userData="user" :lasChild="isLastChild(index)" />
+      <user-data :userData="user" :lasChild="isLastChild(index)"/>
     </div>
   </div>
 </template>
