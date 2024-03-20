@@ -3,7 +3,7 @@
 <h2>Introdução</h2>
 
 <p>Este é um um teste de desenvolvimento front-end Vue.js</p>
-<img src="assets/img/Capturar.png" alt="nest">
+<img src="assets/img/capturar.png" alt="nest">
 
 Trata-se do consumo de um arquivo.json, onde o usuário tem a liberdade
 para selecionar o usuário e seus dependentes. Funcionalidades:
