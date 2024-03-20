@@ -34,7 +34,7 @@ Extras:
 Desafios auto impostos:
 
 - Trabalhar sem utilizar memórias de cache, cookies, ou gerenciamento de estados (Vuex, Pinia, useState)
-- Trabalhar apenas com um component recurso, que faça a renderização dos dados de forma
+- Trabalhar apenas com um component recursivo, que faça a renderização dos dados de forma
 dinânima
 - Todos os dados devem ser passados via props e emits, trafegando exclusivamente nos componentes.
 
